@@ -3,7 +3,7 @@ import type { Recipe } from '../interfaces/Recipe';
 
 
 
-const API_BASE = 'http://localhost:3001';
+const API_BASE = 'http://localhost:8080';
 
 export const fetchRecipes = async (): Promise<Recipe[]> => {
   const res = await axios.get(`${API_BASE}/recipes`);
