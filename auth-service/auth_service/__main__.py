@@ -18,10 +18,7 @@ def get_app() -> FastAPI:
     app: FastAPI = FastAPI(title='TED Auth Service')
 
     # Добавляем CORS middleware
-    origins = ["http://tedzona.online",
-               "https://tedzona.online",
-               "http://www.tedzona.online",
-               "https://www.tedzona.online", ]
+    origins = ["*"]
     
     app.add_middleware(
         CORSMiddleware,
