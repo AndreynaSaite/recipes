@@ -17,6 +17,20 @@ services:
     depends_on:
       - postgres
 
+
+  auth-service:
+    container_name: "auth-service"
+    build: ./auth-service
+    ports:
+      - "8085:8085"
+    env_file:
+      - ./auth-service/.env
+    depends_on:
+      - postgres
+    networks:
+      - backend_network
+
+
   postgres:
     image: postgres:15
     restart: "always"
