@@ -1,21 +1,22 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
-	"github.com/AndreynaSaite/recipes/config"
-	"github.com/AndreynaSaite/recipes/db"
-	"github.com/AndreynaSaite/recipes/routes" 
+	"github.com/AndreynaSaite/recipes/backend/config"
+	"github.com/AndreynaSaite/recipes/backend/db"
+	"github.com/AndreynaSaite/recipes/backend/routers"
 )
 
 func main() {
 	config.LoadConfig()
-	db.Connect() 
-	r := routes.SetupRouter()
-	log.Println("Server started on :8080")
-	err := http.ListenAndServe(":8080", r)
-	if err != nil {
-		log.Fatal(err)
-	}
+	fmt.Print("Starting backend service...")
+	db.Connect()
+
+	r := routers.SetupRouter()
+
+	log.Println("Server started on port 8080")
+	log.Fatal(http.ListenAndServe(":8080", r))
 }

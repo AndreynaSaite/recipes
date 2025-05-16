@@ -1,9 +1,9 @@
-package routes
+package routers
 
 import (
 	"net/http"
 
-	"github.com/AndreynaSaite/recipes/controllers"
+	"github.com/AndreynaSaite/recipes/backend/controllers"
 	"github.com/gorilla/mux"
 )
 

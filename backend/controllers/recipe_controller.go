@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/AndreynaSaite/recipes/db"
-	"github.com/AndreynaSaite/recipes/models"
+	"github.com/AndreynaSaite/recipes/backend/db"
+	"github.com/AndreynaSaite/recipes/backend/models"
 	"github.com/lib/pq"
 )
 
