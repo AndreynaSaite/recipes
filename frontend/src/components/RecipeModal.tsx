@@ -9,10 +9,15 @@ export const RecipeModal = ({ onClose }: { onClose: () => void }) => {
     title: '',
     description: '',
     ingredients: [],
+    image: '',
+    category: '',
+    cuisine: '',
   });
 
   const handleSubmit = async () => {
-    await createRecipe(form);
+    // Очистка от лишних пробелов
+    const trimmedIngredients = form.ingredients.map(i => i.trim()).filter(i => i.length > 0);
+    await createRecipe({ ...form, ingredients: trimmedIngredients });
     onClose();
     window.location.reload();
   };
@@ -30,8 +35,25 @@ export const RecipeModal = ({ onClose }: { onClose: () => void }) => {
         onChange={e => setForm({ ...form, description: e.target.value })}
       />
       <input
+        placeholder="Ссылка на изображение"
+        value={form.image}
+        onChange={e => setForm({ ...form, image: e.target.value })}
+      />
+      <input
+        placeholder="Категория (например, Завтрак)"
+        value={form.category}
+        onChange={e => setForm({ ...form, category: e.target.value })}
+      />
+      <input
+        placeholder="Кухня (например, Итальянская)"
+        value={form.cuisine}
+        onChange={e => setForm({ ...form, cuisine: e.target.value })}
+      />
+      <input
         placeholder="Ингредиенты (через запятую)"
-        onChange={e => setForm({ ...form, ingredients: e.target.value.split(',') })}
+        onChange={e =>
+          setForm({ ...form, ingredients: e.target.value.split(',') })
+        }
       />
       <button onClick={handleSubmit}>Добавить</button>
       <button onClick={onClose}>Отмена</button>
