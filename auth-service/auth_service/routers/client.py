@@ -24,11 +24,11 @@ async def login_client(login_request: ClientLoginRequest, db: AsyncSession = Dep
     ### logger.info(f'Client {client.email} logged in')
     return ClientLoginResponse(
         status='ok',
+        name=client.name,
         JWT=create_token({
             'id': client.id,
             'email': str(client.email),
-            'full_name': client.full_name,
-            'telegram': client.telegram,
+            'name': client.name,
         })
     )
 
@@ -36,65 +36,20 @@ async def login_client(login_request: ClientLoginRequest, db: AsyncSession = Dep
 @client_router.post('/register', response_model=ClientRegisterResponse)
 async def register_client(register_request: ClientRegisterRequest, db: AsyncSession = Depends(get_session)):
     new_client: ClientsModel = ClientsModel(
+        name=str(register_request.name),
         email=str(register_request.email),
         password=PasswordUtils.hash_password(register_request.password),
-        full_name=register_request.full_name,
-        telegram=register_request.telegram,
-        about=register_request.about,
-        tag=register_request.tag,
-        is_speaker=register_request.is_speaker,
-        speaker_description=register_request.speaker_description,
-    )
+   )
 
     await add_record_db(db, new_client)
 
     ### logger.info(f'client {new_client.email} registered')
     return ClientRegisterResponse(
         status='ok',
+        name=new_client.name,
         JWT=create_token({
             'id': new_client.id,
             'email': str(new_client.email),
-            'full_name': new_client.full_name,
-            'telegram': new_client.telegram,
+            'name': new_client.name,
         })
     )
-
-
-# @client_router.put('/update', response_model=ClientUpdateResponse)
-# async def update_client(update_request: ClientUpdateRequest, db: AsyncSession = Depends(get_session)):
-#     token_data: dict = decode_token(update_request.JWT)
-#     result = await db.execute(select(ClientsModel).filter(ClientsModel.id == token_data['id']))
-#     client: ClientsModel | None = result.scalars().first()
-#     if client is None:
-#         raise HTTPException(status_code=400, detail='client not found')
-#
-#     if update_request.email:
-#         client.email = str(update_request.email) # type: ignore
-#     if update_request.TIN:
-#         ### logger.info(f'client {client.email} updated TIN')
-#         client.tin = update_request.TIN # type: ignore
-#     if update_request.phone_number:
-#         ### logger.info(f'client {client.email} updated phone number')
-#         client.phone_number = update_request.phone_number # type: ignore
-#     if update_request.company:
-#         ### logger.info(f'client {client.email} updated company name')
-#         client.company = update_request.company # type: ignore
-#
-#     await update_record_db(db, client)
-#
-#     ### logger.info(f'client {client.email} updated')
-#
-#     return ClientUpdateResponse(status='ok')
-#
-#
-# @client_router.delete('/delete', response_model=ClientDeleteResponse)
-# async def delete_client(delete_request: ClientDeleteRequest, db: AsyncSession = Depends(get_session)):
-#     token_data: dict = decode_token(delete_request.JWT)
-#     result = await db.execute(select(ClientsModel).filter(ClientsModel.id == token_data['id']))
-#     client: ClientsModel | None = result.scalars().first()
-#     if client is None:
-#         raise HTTPException(status_code=400, detail='Client not found')
-#
-#     await delete_record_db(db, client)
-#
-#     return ClientDeleteResponse(status='ok')
