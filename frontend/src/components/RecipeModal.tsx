@@ -46,7 +46,7 @@ const RecipeModal = ({ onClose, onRecipeAdded }: Props) => {
         onChange={e => setForm({ ...form, title: e.target.value })}
       />
       <textarea
-        placeholder="Описание"
+        placeholder="Рецепт"
         value={form.description}
         onChange={e => setForm({ ...form, description: e.target.value })}
       />
