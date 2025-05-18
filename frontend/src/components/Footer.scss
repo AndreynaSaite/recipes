@@ -1,0 +1,23 @@
+.footer {
+  flex-shrink: 0;
+  background-color: #ffbc80; // мягкий оранжевый
+  color: #4a2c00;
+  padding: 1rem 2rem;
+  text-align: center;
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+
+  div {
+    margin: 0.3rem 0;
+  }
+
+  a {
+    color: #4a2c00;
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

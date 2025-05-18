@@ -5,6 +5,7 @@ import RecipeModal from './components/RecipeModal';
 import { AuthProvider } from './context/AuthContext';
 import { fetchRecipes } from './api/recipes';
 import type { Recipe } from './interfaces/Recipe';
+import { Footer } from './components/Footer';
 import './styles/main.scss';
 
 function App() {
@@ -28,12 +29,16 @@ function App() {
 
   return (
     <AuthProvider>
-      <Header onAddClick={openModal} />
-      <button className="floating-add" onClick={openModal}>+</button>
-      <Home recipes={recipes} />
-      {showModal && (
-        <RecipeModal onClose={closeModal} onRecipeAdded={handleRecipeAdded} />
-      )}
+      <div className="app-layout">
+        <Header onAddClick={openModal} />
+        <main className="app-main">
+          <Home recipes={recipes} />
+        </main>
+        {showModal && (
+          <RecipeModal onClose={closeModal} onRecipeAdded={handleRecipeAdded} />
+        )}
+        <Footer />
+      </div>
     </AuthProvider>
   );
 }

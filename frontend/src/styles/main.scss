@@ -1,7 +1,24 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100%;
+}
+
 body {
   font-family: sans-serif;
   margin: 0;
   background: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1 0 auto; // Чтобы занять всё пространство между хедером и футером
 }
 
 .header {
@@ -9,7 +26,7 @@ body {
   justify-content: space-between;
   padding: 1rem 2rem;
   background: white;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 
   .logo {
     font-size: 1.5rem;
@@ -29,6 +46,12 @@ body {
   margin: 1rem;
 }
 
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .recipes {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -40,7 +63,7 @@ body {
   background: white;
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 
   img {
     width: 100%;
@@ -60,7 +83,7 @@ body {
   width: 30%;
   background: white;
   padding: 2rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   gap: 1rem;
