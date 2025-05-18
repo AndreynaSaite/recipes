@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react';
-import { fetchRecipes } from '../api/recipes';
 import type { Recipe } from '../interfaces/Recipe';
 import { FilterPanel } from '../components/FilterPanel';
 import { RecipeCard } from '../components/RecipeCard';
 
-export const Home = () => {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [filtered, setFiltered] = useState<Recipe[]>([]);
+interface HomeProps {
+  recipes: Recipe[];
+}
+
+export const Home = ({ recipes }: HomeProps) => {
+  const [filtered, setFiltered] = useState<Recipe[]>(recipes);
 
   useEffect(() => {
-    const load = async () => {
-      const data = await fetchRecipes();
-      setRecipes(data);
-      setFiltered(data);
-    };
-    load();
-  }, []);
+    setFiltered(recipes);
+  }, [recipes]);
 
   return (
     <div className="home-page">

@@ -2,24 +2,40 @@ import { useState } from 'react';
 import { createRecipe } from '../api/recipes';
 import type { Recipe } from '../interfaces/Recipe';
 
-import './RecipeModal.scss';
+interface Props {
+  onClose: () => void;
+  onRecipeAdded?: (recipe: Recipe) => void;
+}
 
-export const RecipeModal = ({ onClose }: { onClose: () => void }) => {
-  const [form, setForm] = useState<Recipe>({
+const RecipeModal = ({ onClose, onRecipeAdded }: Props) => {
+  const [form, setForm] = useState({
     title: '',
-    description: '',
-    ingredients: [],
-    image: '',
     category: '',
     cuisine: '',
+    ingredients: [] as string[],
+    description: '',
+    image: '',
   });
 
-  const handleSubmit = async () => {
-    // Очистка от лишних пробелов
-    const trimmedIngredients = form.ingredients.map(i => i.trim()).filter(i => i.length > 0);
-    await createRecipe({ ...form, ingredients: trimmedIngredients });
-    onClose();
-    window.location.reload();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newRecipe: Recipe = {
+      title: form.title,
+      category: form.category,
+      cuisine: form.cuisine,
+      ingredients: form.ingredients.map(i => i.trim()),
+      description: form.description,
+      image: form.image,
+    };
+
+    try {
+      await createRecipe(newRecipe);
+      onRecipeAdded?.(newRecipe);
+      onClose();
+    } catch (error) {
+      console.error('Ошибка при создании рецепта:', error);
+    }
   };
 
   return (
@@ -51,6 +67,7 @@ export const RecipeModal = ({ onClose }: { onClose: () => void }) => {
       />
       <input
         placeholder="Ингредиенты (через запятую)"
+        value={form.ingredients.join(', ')}
         onChange={e =>
           setForm({ ...form, ingredients: e.target.value.split(',') })
         }
@@ -60,3 +77,5 @@ export const RecipeModal = ({ onClose }: { onClose: () => void }) => {
     </div>
   );
 };
+
+export default RecipeModal;
