@@ -28,12 +28,7 @@ export const FilterPanel = ({ recipes, setFilteredRecipes }: Props) => {
     setTitles(unique(recipes.map(r => r.title)));
   }, [recipes]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFilters(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleFilter = () => {
+  useEffect(() => {
     const filtered = recipes.filter(recipe => {
       const matchesCategory = !filters.category || recipe.category === filters.category;
       const matchesCuisine = !filters.cuisine || recipe.cuisine === filters.cuisine;
@@ -50,55 +45,61 @@ export const FilterPanel = ({ recipes, setFilteredRecipes }: Props) => {
     });
 
     setFilteredRecipes(filtered);
+  }, [filters, recipes, setFilteredRecipes]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFilters(prev => ({ ...prev, [name]: value }));
   };
 
   return (
     <div className="filters">
+      <div className="search-wrapper">
+        <span className="search-icon">🔍</span>
+        <input
+          name="search"
+          type="text"
+          placeholder="Поиск по рецептам или ингредиентам"
+          value={filters.search}
+          onChange={handleChange}
+        />
+      </div>
+
       <select
+        className="marginrt"
         name="category"
         value={filters.category}
         onChange={handleChange}
-        className={filters.category === '' ? 'empty-value' : ''}
       >
-        <option value="">Любая категория</option>
+        <option value="">Категория</option>
         {categories.map(cat => (
           <option key={cat} value={cat}>{cat}</option>
         ))}
       </select>
 
       <select
+        className="marginrt"
         name="title"
         value={filters.title}
         onChange={handleChange}
-        className={filters.title === '' ? 'empty-value' : ''}
       >
-        <option value="">Любое блюдо</option>
+        <option value="">Блюдо</option>
         {titles.map(title => (
           <option key={title} value={title}>{title}</option>
         ))}
       </select>
 
       <select
+        className="marginrt"
         name="cuisine"
         value={filters.cuisine}
         onChange={handleChange}
-        className={filters.cuisine === '' ? 'empty-value' : ''}
       >
-        <option value="">Любая кухня</option>
+        <option value="">Кухня</option>
         {cuisines.map(cuisine => (
           <option key={cuisine} value={cuisine}>{cuisine}</option>
         ))}
       </select>
-
-      <input
-        name="search"
-        type="text"
-        placeholder="Ингредиенты, детали..."
-        value={filters.search}
-        onChange={handleChange}
-      />
-
-      <button onClick={handleFilter}>Поиск</button>
     </div>
   );
 };

@@ -3,99 +3,89 @@
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
-  background: white; /* светло-голубой фон */
-  border-radius: 12px;
-  padding: 25px 35px;
-  max-width: 1200px;
+  background: #ffd6d6; // мягкий розовый фон
+  border-radius: 20px;
+  padding: 30px 40px;
+  max-width: 900px;
   width: 90%;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
   z-index: 999;
   font-family: Arial, sans-serif;
-  color: black; /* черный текст */
+  color: #222;
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 
-/* Верхний блок: фото слева, название и кухня справа */
 .header {
   display: flex;
-  background: #d0e8ff;
-  gap: 30px;
-  align-items: flex-start;
-}
-
-/* Фото — шире чем выше, с фиксированной высотой */
-.header img {
-  width: 320px;   /* ширина больше высоты */
-  height: 200px;  /* высота меньше ширины */
-  object-fit: cover;
-  border-radius: 10px;
-  flex-shrink: 0;
-}
-
-/* Контейнер с названием и кухней */
-.title-info {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 8px;
-  flex-grow: 1;
-  min-width: 0; /* важно для правильного сжатия flex-элементов */
+  gap: 15px;
+  align-items: center;
 }
 
-.title-info h2 {
+.header img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  align-self: center;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+
+.title-and-info {
+  text-align: left;
+}
+
+.title-and-info h2 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  line-height: 1.2;
-  word-wrap: break-word;   /* разрешить перенос по словам */
-  overflow-wrap: break-word; /* для совместимости */
+  color: #000;
 }
 
-
-/* Кухня и категория */
-.title-info .cuisine-category {
-  font-size: 1.2rem;
+.title-and-info .cuisine-category {
+  font-size: 1rem;
   font-weight: 500;
-  color: #003366;
+  color: #333;
 }
 
-/* Нижний блок: ингредиенты слева, описание справа */
+
 .content {
   display: flex;
-  gap: 40px;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-/* Ингредиенты */
-.ingredients {
+.ingredients, .description {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
   flex: 1;
-  font-size: 1rem;
-  line-height: 1.5;
-  margin-left: 40px;
+  min-width: 250px;
+  max-width: 45%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Каждый ингредиент с новой строки (уже по умолчанию, т.к. <p>) */
-.title-and-info {
-  margin-right: 50px;
-}
-/* Описание */
-.description {
-  flex: 1.5;
-  font-size: 1rem;
-  line-height: 1.5;
-  overflow-wrap: break-word;
-  margin-left: 50px;
-}
-
-/* Заголовки секций */
 .section-title {
-  font-weight: 600;
-  margin-bottom: 6px;
-  color: #003366;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #333;
 }
 
-/* Кнопка закрытия */
+.ingredients p,
+.description p {
+  margin: 0 0 8px 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+
 .close-button {
   position: absolute;
   right: 15px;

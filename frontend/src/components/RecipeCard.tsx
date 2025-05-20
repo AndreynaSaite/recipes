@@ -9,7 +9,10 @@ interface Props {
 export const RecipeCard = ({ recipe, onClick }: Props) => (
   <div className="card" onClick={onClick}>
     <img src={recipe.image || 'https://via.placeholder.com/200'} alt={recipe.title} />
-    <h3>{recipe.title}</h3>
-    <span className="tags">{recipe.category} · {recipe.cuisine}</span>
+    <div>
+      <h1 className="titleh1">{recipe.title}</h1>
+      <p className="desc"><strong>Рецепт:</strong> {recipe.description}</p>
+      <span className="tags">{recipe.category} · {recipe.cuisine}</span>
+    </div>
   </div>
 );

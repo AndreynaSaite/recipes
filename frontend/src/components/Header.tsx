@@ -20,16 +20,12 @@ export const Header = ({ onAddClick }: HeaderProps) => {
   };
 
   return (
-    <header className="header">
-      <div className="logo">🍽 Мои рецепты</div>
-      
+    <header className="headerD">
+      <div className="logo"></div>
+      <div className="Name">Персональная кулинарная книга рецептов</div>
       <div className="header-actions">
         {isAuthenticated && user?.name && (
            <>
-            <div className="user-greeting">
-              <span className="welcome">Привет, </span>
-              <span className="user-name">{user.name}</span>
-            </div>
            <button className="add-btn" onClick={onAddClick}>
              Добавить рецепт
            </button>

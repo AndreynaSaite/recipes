@@ -5,19 +5,17 @@ export const Footer = () => {
     <footer
       style={{
         flexShrink: 0,
-        backgroundColor: '#ffbc80',
-        color: '#4a2c00',
+        backgroundColor: '#00a04f', // зелёный фон
+        color: 'white',
         padding: '1rem 2rem',
-        textAlign: 'center',
-        boxShadow: '0 -1px 4px rgba(0, 0, 0, 0.1)',
-        fontSize: '0.9rem',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        fontSize: '1rem',
       }}
     >
-      <div style={{ margin: '0.3rem 0' }}>Контакты:</div>
-      <div style={{ margin: '0.3rem 0' }}>
-        email: klucenkoem2@gmail.com | тел: +7 (912) 826-28-38
-      </div>
-      <div style={{ margin: '0.3rem 0' }}>© 2025 Bloom</div>
+      <div>My food 🩷</div>
+      <div>Хомутова Валерия</div>
     </footer>
   );
 };
