@@ -8,4 +8,5 @@ type Recipe struct {
 	Category    *string  `json:"category,omitempty"`
 	Cuisine     *string  `json:"cuisine,omitempty"`
 	Ingredients []string `json:"ingredients"`
+	Recipet     string   `json:"Recipet"`
 }

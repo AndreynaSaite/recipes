@@ -6,4 +6,5 @@ export interface Recipe {
   category?: string;
   cuisine?: string;
   ingredients: string[];
+  Recipet: string;
 }

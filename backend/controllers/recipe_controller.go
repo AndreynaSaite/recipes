@@ -10,7 +10,7 @@ import (
 )
 
 func GetRecipes(w http.ResponseWriter, r *http.Request) {
-	rows, err := db.DB.Query("SELECT id, title, description, image, category, cuisine, ingredients FROM recipes")
+	rows, err := db.DB.Query("SELECT id, title, description, image, category, cuisine, ingredients, recipet FROM recipes")
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
@@ -23,7 +23,7 @@ func GetRecipes(w http.ResponseWriter, r *http.Request) {
 		var image, category, cuisine *string
 		var ingredients pq.StringArray
 
-		err := rows.Scan(&rec.ID, &rec.Title, &rec.Description, &image, &category, &cuisine, &ingredients)
+		err := rows.Scan(&rec.ID, &rec.Title, &rec.Description, &image, &category, &cuisine, &ingredients, &rec.Recipet)
 		if err != nil {
 			http.Error(w, err.Error(), 500)
 			return
@@ -49,14 +49,15 @@ func CreateRecipe(w http.ResponseWriter, r *http.Request) {
 	}
 
 	err := db.DB.QueryRow(
-		`INSERT INTO recipes (title, description, image, category, cuisine, ingredients) 
-		 VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`,
+		`INSERT INTO recipes (title, description, image, category, cuisine, ingredients, Recipet) 
+		 VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`,
 		rec.Title,
 		rec.Description,
 		rec.Image,
 		rec.Category,
 		rec.Cuisine,
 		pq.Array(rec.Ingredients),
+		rec.Recipet,
 	).Scan(&rec.ID)
 
 	if err != nil {

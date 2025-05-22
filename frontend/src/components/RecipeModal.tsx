@@ -15,6 +15,7 @@ const RecipeModal = ({ onClose, onRecipeAdded }: Props) => {
     ingredients: [] as string[],
     description: '',
     image: '',
+    Recipet: '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,6 +28,7 @@ const RecipeModal = ({ onClose, onRecipeAdded }: Props) => {
       ingredients: form.ingredients.map(i => i.trim()),
       description: form.description,
       image: form.image,
+      Recipet: form.Recipet,
     };
 
     try {
@@ -46,7 +48,7 @@ const RecipeModal = ({ onClose, onRecipeAdded }: Props) => {
         onChange={e => setForm({ ...form, title: e.target.value })}
       />
       <textarea
-        placeholder="Рецепт"
+        placeholder="Описание"
         value={form.description}
         onChange={e => setForm({ ...form, description: e.target.value })}
       />
@@ -71,6 +73,11 @@ const RecipeModal = ({ onClose, onRecipeAdded }: Props) => {
         onChange={e =>
           setForm({ ...form, ingredients: e.target.value.split(',') })
         }
+      />
+      <textarea
+        placeholder="Рецепт"
+        value={form.Recipet}
+        onChange={e => setForm({ ...form, Recipet: e.target.value })}
       />
       <button onClick={handleSubmit}>Добавить</button>
       <button onClick={onClose}>Отмена</button>

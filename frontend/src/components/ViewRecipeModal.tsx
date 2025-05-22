@@ -14,6 +14,7 @@ const ViewRecipeModal = ({ recipe, onClose }: Props) => {
         <img src={recipe.image || 'https://via.placeholder.com/150'} alt={recipe.title} />
         <div className="title-and-info">
           <h2>{recipe.title}</h2>
+          <p>{recipe.description}</p>
           <div className="cuisine-category">
             Кухня: {recipe.cuisine} · {recipe.category}
           </div>
@@ -28,7 +29,7 @@ const ViewRecipeModal = ({ recipe, onClose }: Props) => {
         </div>
         <div className="description">
           <div className="section-title">Рецепт:</div>
-          <p>{recipe.description}</p>
+          <p>{recipe.Recipet}</p>
         </div>
       </div>
     </div>
